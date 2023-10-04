@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Admission Form</title>
+</head>
+
+<body>
+
+    <h1>Student Admission Form</h1>
+    <hr>
+
+    <form>
+
+        <label>Full Name</label>
+        <input type="text" minlength="3">
+        <br>
+        <br>
+        <label>Email Address</label>
+        <input type="email" required>
+        <br>
+        <br>
+        <label>Age</label>
+        <input type="number" min="15">
+        <br>
+        <br>
+        <label>Date of Fee Submission</label>
+        <input type="date">
+        <br><br>
+
+        <label>Mailing Address</label>
+        <br>
+        <textarea cols="30" rows="10"></textarea>
+
+        <br><br>
+
+        <label>Select City</label>
+        <select>
+            <option>Lucknow</option>
+            <option>Kanpur</option>
+            <option>Prayagraj</option>
+            <option>Banaras</option>
+            <option>Mumbai</option>
+        </select>
+        <br><br>
+        <label>Board of Intermediate</label>
+        <input type="text" list="board">
+
+        <datalist id="board">
+            <option>UP Board</option>
+            <option>CBSE Board</option>
+            <option>ICSE Board</option>
+            <option>Bihar Board</option>
+        </datalist>
+
+        <br><br>
+
+        <label>Gender</label>
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender"> Female
+
+        <br><br>
+        <input type="checkbox"> <span>Accept Terms and Conditions</span>
+        <br>
+        <details>
+            <summary>View Terms and Conditions</summary>
+
+            <p>Lorem ipsum dolor sit, <mark>amet consectetur adipisicing elit.</mark> Porro impedit rerum, debitis repellat
+                cupiditate accusamus, repellendus possimus quidem facere voluptas quis. Sunt, repellendus! Quas
+                provident commodi accusantium voluptas officiis praesentium, quisquam possimus nemo sunt obcaecati
+                accusamus eaque dolore voluptate, perferendis quod quo libero? Magnam perferendis dolorem temporibus.
+                Alias, quam laudantium!</p>
+
+        </details>
+        <br>
+
+        <button>Submit</button>
+
+    </form>
+    <video width="300" src="video.mp4" controls autoplay></video>
+    <!-- <video src="video.mp4" controls autoplay></video> -->
+
+</body>
+
+</html>
+  
