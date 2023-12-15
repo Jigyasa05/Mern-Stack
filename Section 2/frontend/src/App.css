@@ -1,0 +1,9 @@
+.my-title{
+  color: red;
+}
+
+.nav-item .active{
+border-bottom: 2px solid crimson;
+color: crimson !important;
+font-weight: bold;
+}
