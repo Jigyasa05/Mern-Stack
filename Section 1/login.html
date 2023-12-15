@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+      
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
+
+ 
+
+
+    <style>
+
+        *{
+            font-family: Montserrat;
+        }
+        .mycard{
+            border:1px solid red;
+            width: 20%;
+            padding: 30px;
+            border-radius:10px;
+            /* x-offset y-offset blur size color */
+            box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.518);
+            background-color: white                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
+
+        }                                                                                                                                
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* background-color:skyblue */
+            /* background-image: linear-gradient(#d7939f,#9b9bd8,#c18585,#ffc0cb); */
+            /* background-image: url(https://img.freepik.com/premium-photo/study-desk-work-space-home-pastel-green-color-with-plant-healthy-lifestyle-3d-render_576429-529.jpg); */
+            background-image: linear-gradient(#d7939f80,#9b9bd861),
+            url('https://img.freepik.com/premium-photo/study-desk-work-space-home-pastel-green-color-with-plant-healthy-lifestyle-3d-render_576429-529.jpg');          
+            background-size: cover;
+        }
+        .form-title{
+            text-align: center;
+            font-size: 30px;
+            
+        }
+        .myinput{
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+        .myinput:focus{
+            background-color: hwb(53 54% 15%);
+        }
+        .mybtn{
+            color: solid hsl(0, 17%, 92%);
+            background-color: #844de8;
+            border-radius: 5px;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.473);
+            font-size: small;
+
+            
+
+        }
+
+        .mybtn:hover{
+            background-color: yellowgreen;
+            color: white;
+            border: 2px solid;
+
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="mycard">
+        <h3 class="form-title">Login Form</h3>
+<form>
+    <label>Email Address</label>
+    <Input type="text" class="myinput"></Input>
+    <label>Password</label>
+    <Input type="password" class="myinput"></Input>
+    <button class="mybtn">Submit</button>
+</form>        
+
+    </div>
+    
+</body>
+</html>
