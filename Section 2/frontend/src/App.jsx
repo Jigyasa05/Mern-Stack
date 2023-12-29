@@ -15,6 +15,7 @@ import { Toaster } from 'react-hot-toast';
 import { SnackbarContent, SnackbarProvider } from 'notistack';
 import ManageUser from './components/ManageUser';
 import UpdateUser from './components/UpdateUser';
+import { AppProvider } from './AppContex';
 
 
 const App = () => {
@@ -25,7 +26,8 @@ const App = () => {
         {/* // <Toaster position='top-center'/> */}
 
         < BrowserRouter>
-          <Navbar />
+        <AppProvider>
+          <Navbar  cartItem={10}/>
           {/* <Link to ="/">Home Page</Link>
         <Link to ="/login">Login Page</Link>
         <Link to ="/signup">Signup Page</Link>
@@ -47,7 +49,7 @@ const App = () => {
 
 
           </Routes>
-
+          </AppProvider>
         </BrowserRouter>
       </SnackbarProvider>
 

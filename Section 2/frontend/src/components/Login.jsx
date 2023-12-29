@@ -1,87 +1,109 @@
+import { useFormik } from 'formik';
+import { enqueueSnackbar } from 'notistack';
 import React from 'react'
-import { useFormik } from 'formik'
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-const SignupSchema = Yup.object().shape({
-  
+import useAppContext from '../AppContex';
+
+const LoginSchema = Yup.object().shape({
+
   email: Yup.string().email('Invalid email').required('Required'),
-  password : Yup.string().min(5,'Too Short!').required('Required')
-  .matches(/[0-9]/, 'Number is required')
-  .matches(/[a-z]/, 'Lowercase is required')
-  .matches(/[A-Z]/, 'Uppercase is required')
-  .matches(/[^\w]/, 'Special character is required'),
- 
+  password: Yup.string().required('Required')
 });
 
 const Login = () => {
-  const LoginForm = useFormik({
-    initialValues:{
-     
-      email:'',
-      password:'',
-     
+
+  const navigate = useNavigate();
+
+  const { setLoggedIn } = useAppContext();
+
+  const loginForm = useFormik({
+    initialValues: {
+
+      email: '',
+      password: ''
     },
-    onSubmit:(values)=>{
-     // alert(values);
+    onSubmit: async (values, { resetForm }) => {
+      // alert(JSON.stringify(values));
       console.log(values);
-    //  resetForm();// this is reset form
-    toast.success('Form submitted Successfully');
+
+      // send request to backend/REST API
+      const response = await fetch('http://localhost:5000/user/add', {
+        method: 'POST',
+        body: JSON.stringify(values),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log(response.status);
+      console.log(response.statusText);
+
+      if (response.status === 200) {
+        enqueueSnackbar('Loggedin Successfully', { variant: 'success' });
+
+        const data = await response.json();
+        console.log(data);
+
+        // to save user data in sessino
+        sessionStorage.setItem('user', JSON.stringify(data));
+        setLoggedIn(true)
+        navigate("/ManageUser")
+
+
+      } else if (response.status === 401) {
+        enqueueSnackbar('Email or Password is incorrect', { variant: 'error' });
+      } else {
+        enqueueSnackbar('Something went wrong', { variant: 'error' });
+      }
+
+      // resetForm();
+      // toast.success('Form Submitted Successfully');
     },
-    validationSchema: SignupSchema
+    validationSchema: LoginSchema
   });
-  
- return (
-    <div>
-      <form onSubmit={LoginForm.handleSubmit}>
-  {/* Email input */}
-  <div data-mdb-input-init="" className=" mb-4">
-    <input type="email" id="form1Example1" className="form-control" />
-    <label className="form-label" htmlFor="form1Example1">
-      Email address
-    </label>
-  </div>
-  {/* Password input */}
-  <div data-mdb-input-init="" className="form-outline mb-4">
-    <input type="password" id="form1Example2" className="form-control" />
-    <label className="form-label" htmlFor="form1Example2">
-      Password
-    </label>
-  </div>
-  {/* 2 column grid layout for inline styling */}
-  <div className="row mb-4">
-    <div className="col d-flex justify-content-center">
-      {/* Checkbox */}
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          defaultValue=""
-          id="form1Example3"
-          defaultChecked=""
-        />
-        <label className="form-check-label" htmlFor="form1Example3">
-          {" "}
-          Remember me{" "}
-        </label>
+
+
+
+  return (
+    <div className='login-bg'>
+      <div className="container">
+
+        <div className="row align-items-center vh-100 gx-5">
+          <div className="col-md-7">
+            <h1 className='display-1 fw-bold text-white'>Bring your Ideas to Reality with Us</h1>
+            <p className='fs-5 text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quas cum quaerat voluptatum delectus tenetur facilis maiores, esse deleniti ad nulla voluptates similique vero eius eaque! Molestiae molestias nulla natus quam minima veniam aliquam ab officia perferendis animi adipisci, alias quae veritatis repudiandae rerum aut minus distinctio, deserunt sapiente provident?</p>
+          </div>
+          <div className="col-md-5 py-5">
+            <div className="card shadow">
+              <div className="card-body p-5">
+                <h3 className='my-3 text-center'>Brand Logo</h3>
+                <h5 className='text-center text-muted'>login Form</h5>
+
+                <form onSubmit={loginForm.handleSubmit} >
+
+                  <label htmlFor="email">Email Address</label>
+                  <span className='text-danger ms-3'>{loginForm.touched.email && loginForm.errors.email}</span>
+                  <input type="text" id='email' onChange={loginForm.handleChange} value={loginForm.values.email} className='form-control mb-4' />
+
+                  <label htmlFor="password">Password</label>
+                  <span className='text-danger ms-3'>{loginForm.touched.password && loginForm.errors.password}</span>
+                  <input type="password" id='password' onChange={loginForm.handleChange} value={loginForm.values.password} className='form-control mb-4' />
+
+                  <button type='submit' className='btn btn-primary w-100 my-4'>Submit</button>
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div className="col">
-      {/* Simple link */}
-      <a href="#!">Forgot password?</a>
-    </div>
-  </div>
-  {/* Submit button */}
-  <button
-    data-mdb-ripple-init=""
-    type="submit"
-    className="btn btn-primary btn-block"
-  >
-    Sign in
-  </button>
-</form>
+
 
     </div>
   )
 }
 
-export default Login
+export default Login;
